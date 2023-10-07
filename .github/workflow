@@ -1,0 +1,29 @@
+#include <iostream>
+
+class VRKit {
+public:
+    void startLearning() {
+        std::cout << "Начинаем обучение в VR-режиме" << std::endl;
+        // Здесь можно добавить код для запуска VR-режима
+    }
+
+    void loadLesson(const std::string& lessonName) {
+        std::cout << "Загружаем урок: " << lessonName << std::endl;
+        // Здесь можно добавить код для загрузки урока из базы данных или файловой системы
+    }
+
+    void completeLesson() {
+        std::cout << "Урок успешно завершен!" << std::endl;
+        // Здесь можно добавить код для сохранения прогресса и статистики урока
+    }
+};
+
+int main() {
+    VRKit vrKit;
+    vrKit.startLearning();
+    vrKit.loadLesson("История");
+    // Здесь можно добавить код для взаимодействия с пользователем, выполнения упражнений и т.д.
+    vrKit.completeLesson();
+
+    return 0;
+}
