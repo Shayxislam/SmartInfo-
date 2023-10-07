@@ -1,0 +1,33 @@
+// Файл SpeechRecognition.cs
+using Microsoft.CognitiveServices.Speech;
+
+public class SpeechRecognition
+{
+    private static SpeechRecognizer recognizer;
+
+    public static async Task<string> RecognizeSpeechAsync(string audioFile)
+    {
+        var config = SpeechConfig.FromSubscription("YourSubscriptionKey", "YourRegion");
+        using (recognizer = new SpeechRecognizer(config))
+        {
+            var audioConfig = AudioConfig.FromWavFileInput(audioFile);
+            var result = await recognizer.RecognizeOnceAsync(audioConfig);
+
+            if (result.Reason == ResultReason.RecognizedSpeech)
+            {
+                return result.Text;
+            }
+            else if (result.Reason == ResultReason.NoMatch)
+            {
+                return "Речь не распознана.";
+            }
+            else if (result.Reason == ResultReason.Canceled)
+            {
+                var cancellation = CancellationDetails.FromResult(result);
+                return $"Ошибка распознавания речи: {cancellation.Reason}";
+            }
+
+            return "Неизвестная ошибка.";
+        }
+    }
+}
